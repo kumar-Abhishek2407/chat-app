@@ -1,1 +1,3 @@
-console.log("hello");
+const importedName = require("./second");
+
+console.log(importedName);
