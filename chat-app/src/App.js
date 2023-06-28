@@ -6,6 +6,7 @@ import SignIn from './pages/SignIn';
 import PrivateRoute from './components/PrivateRoute';
 import Home from './pages/Home';
 import PublicRoute from './components/PublicRoute';
+
 function App() {
   return (
     <Switch>
