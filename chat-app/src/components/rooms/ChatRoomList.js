@@ -1,8 +1,12 @@
 import React from 'react';
-import { Nav } from 'rsuite';
+import { Loader, Nav } from 'rsuite';
 import RoomItem from './RoomItem';
+import { useRooms } from '../../context/rooms.context';
+import { Link, useLocation } from 'react-router-dom/cjs/react-router-dom';
 
 const CharRoomList = ({ aboveElHeight }) => {
+  const rooms = useRooms();
+  const location = useLocation();
   return (
     <Nav
       appearance="subtle"
@@ -12,10 +16,23 @@ const CharRoomList = ({ aboveElHeight }) => {
       style={{
         height: `calc(100% -${aboveElHeight}px)`,
       }}
+      activeKey={location.pathname}
     >
-      <Nav.Item>
-        <RoomItem />
-      </Nav.Item>
+      {!rooms && (
+        <Loader center vertical content="loading" speed="slow" size="md" />
+      )}
+      {rooms &&
+        rooms.length > 0 &&
+        rooms.map(room => (
+          <Nav.Item
+            componentClass={Link}
+            to={`/chat/${room}`}
+            key={room.id}
+            eventKey={`/chat/${room}`}
+          >
+            <RoomItem room={room} />
+          </Nav.Item>
+        ))}
     </Nav>
   );
 };
