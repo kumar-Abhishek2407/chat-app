@@ -8,6 +8,7 @@ import EditRoomBtnDrawer from './EditRoomBtnDrawer';
 
 const Top = () => {
   const name = useCurrentRoom(v => v.name);
+  const isAdmins = useCurrentRoom(v => v.isAdmins);
   const isMobile = useMediaQuery('(max-width:992px)');
   return (
     <div>
@@ -27,7 +28,7 @@ const Top = () => {
           <span className="text-disappwar">{name}</span>
         </h4>
         <ButtonToolbar className="white-sapce:no-wrap">
-          <EditRoomBtnDrawer />
+          {isAdmins && <EditRoomBtnDrawer />}
         </ButtonToolbar>
         <div className="d-flex justify-content-between align-items-center">
           <span>todo</span>
